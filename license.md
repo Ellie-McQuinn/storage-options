@@ -1,0 +1,1 @@
+All Rights Reserved 2025 Ellie McQuinn unless stated otherwise.
