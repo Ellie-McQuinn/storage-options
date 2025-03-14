@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All Rights Reserved"
+issueTrackerURL="https://github.com/Ellie-McQuinn/storage-options/issues"
+
+[[mods]]
+modId="ellsso"
+version="2101.0.0.1"
+displayName="Ellie's Storage Options"
+#updateJSONURL="https://api.modrinth.com/updates/ellies-storage-options/forge_updates.json"
+displayURL="https://modrinth.com/project/ellies-storage-options"
+logoFile="ellsso.png"
+logoBlur = false
+
+authors="Ellie McQuinn"
+description="Adds some useful and pretty storage options ^_^"
+
+[[dependencies.ellsso]]
+modId="neoforge"
+type="required"
+versionRange="[21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.ellsso]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="BOTH"
