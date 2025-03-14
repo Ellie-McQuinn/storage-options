@@ -1,12 +1,15 @@
 package com.duck.elliemcquinn.storageoptions.neoforge;
 
+import com.duck.elliemcquinn.storageoptions.neoforge.registration.ModBlocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 
-@Mod("ellsso")
+@Mod(value = Main.ID)
 public class Main {
-    public Main(IEventBus eventBus, ModContainer container) {
+    public static final String ID = "ellsso";
 
+    public Main(IEventBus modBus, ModContainer container) {
+        ModBlocks.BLOCKS.register(modBus);
     }
 }

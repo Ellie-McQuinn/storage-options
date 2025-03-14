@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+
 plugins {
     `java-library`
     id("net.neoforged.moddev") version "2.0.78"
@@ -16,6 +18,32 @@ neoForge {
     runs {
         create("client") {
             client()
+        }
+
+        create("server") {
+            server()
+        }
+
+        create("data") {
+            data()
+
+            programArguments.addAll(
+                "--mod", "ellsso",
+                "--all",
+                "--output", file("src/generated/resources/").absolutePath,
+                "--existing", file("src/main/resources/").absolutePath
+            )
+        }
+
+        configureEach {
+            ideName = "NeoForge " + name.uppercaseFirstChar()
+            logLevel = org.slf4j.event.Level.INFO
+        }
+    }
+
+    mods {
+        create("ellsso") {
+            sourceSet(sourceSets.main.get())
         }
     }
 }
