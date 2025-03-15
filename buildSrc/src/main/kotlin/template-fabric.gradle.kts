@@ -74,14 +74,6 @@ tasks.register("processJson", ProcessJsonTask::class) {
     dependsOn(tasks.remapJar)
     input.set(tasks.remapJar.get().outputs.files.singleFile)
     archiveClassifier = ""
-
-    processors.put("quilt.mod.json") {
-        val contributors = getAsJsonObject("quilt_loader").getAsJsonObject("metadata").getAsJsonObject("contributors")
-
-        for ((contributor, role) in Constants.CONTRIBUTORS) {
-            contributors.addProperty(contributor, role)
-        }
-    }
 }
 
 tasks.build {
