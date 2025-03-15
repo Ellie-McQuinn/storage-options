@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "ellsso",
+  "version": "${version}",
+  "name": "Ellie's Storage Options",
+  "description": "Adds some useful and pretty storage options ^_^",
+  "authors": ["Ellie McQuinn"],
+  "contact": {
+    "homepage": "https://modrinth.com/project/ellies-storage-options",
+    "sources": "https://github.com/ellie-mcquinn/storage-options",
+    "issues": "https://github.com/ellie-mcquinn/storage-options/issues"
+  },
+  "license": "All Rights Reserved",
+  "icon": "ellsso.png",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "${fl_minecraft_constraint}",
+    "java": ">=${java_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "fabric-language-kotlin": ">=${fabric_kotlin_version}"
+  },
+  "entrypoints": {
+    "main": [
+      {
+        "value": "com.duck.elliemcquinn.storageoptions.fabric.Main",
+        "adapter": "kotlin"
+      }
+    ]
+  }
+}

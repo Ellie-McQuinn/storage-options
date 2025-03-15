@@ -112,9 +112,6 @@ tasks.jar {
 tasks.processResources {
     val replacements = mutableMapOf(
         "version" to version,
-        "group" to Constants.GROUP,
-        "mod_name" to Constants.MOD_NAME,
-        "mod_id" to Constants.MOD_ID,
 
         "java_version" to Constants.JAVA_VERSION.asInt(),
         "minecraft_version" to Constants.MINECRAFT_VERSION,
@@ -125,11 +122,9 @@ tasks.processResources {
         "fabric_api_version" to Constants.FABRIC_API_VERSION,
         "fabric_kotlin_version" to Constants.FABRIC_KOTLIN_VERSION.substringBefore('+'),
 
-        "quilt_loader_version" to Constants.QUILT_LOADER_VERSION,
-
         "fml_version_constraint" to Constants.FML_CONSTRAINT,
         "neoforge_version" to Constants.NEOFORGE_VERSION,
-        "neoforge_kotlin_Version" to Constants.NEOFORGE_KOTLIN_VERSION
+        "neoforge_kotlin_version" to Constants.NEOFORGE_KOTLIN_VERSION
     )
     replacements.putAll(Constants.EXTRA_MOD_INFO_REPLACEMENTS)
 

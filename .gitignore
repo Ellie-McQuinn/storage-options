@@ -7,5 +7,7 @@ build/
 .gradle/
 run/
 
-# Java / Gradle profiles
+
+# Java / Kotlin
 java_*.hprof
+.kotlin/

@@ -35,9 +35,6 @@ object Constants {
     const val FABRIC_KOTLIN_VERSION = "1.13.0+kotlin.2.1.0"
     const val FABRIC_LOADER_VERSION = "0.16.10"
 
-    // https://quiltmc.org/en/usage/latest-versions/
-    const val QUILT_LOADER_VERSION = "0.26.3"
-
     const val NEOFORM_VERSION = "1.21.1-20240808.144430" // // https://projects.neoforged.net/neoforged/neoform/
     const val NEOFORGE_VERSION = "21.1.133" // https://projects.neoforged.net/neoforged/neoforge/
     const val NEOFORGE_KOTLIN_VERSION = "5.7.0"

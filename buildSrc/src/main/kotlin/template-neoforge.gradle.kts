@@ -44,13 +44,6 @@ neoForge {
     }
 }
 
-repositories {
-    maven {
-        name = "Kotlin For Forge"
-        url = uri("https://thedarkcolour.github.io/KotlinForForge")
-    }
-}
-
 dependencies {
     implementation("thedarkcolour:kotlinforforge-neoforge:${Constants.NEOFORGE_KOTLIN_VERSION}")
 }
