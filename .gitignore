@@ -6,3 +6,6 @@ Zig.iml
 build/
 .gradle/
 run/
+
+# Java / Gradle profiles
+java_*.hprof
