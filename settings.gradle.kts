@@ -17,5 +17,5 @@ buildscript {
 include(
     "common",
     "neoforge",
-    "thread", "fabric"
+    "fabric"
 )

@@ -14,6 +14,17 @@ dependencies {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${Constants.PARCHMENT_MINECRAFT}:${Constants.PARCHMENT_RELEASE}@zip")
     })
+
+    modImplementation(group = "net.fabricmc", name = "fabric-loader", version = Constants.FABRIC_LOADER_VERSION)
+    modImplementation(group = "net.fabricmc.fabric-api", name = "fabric-api", version = Constants.FABRIC_API_VERSION)
+    modImplementation(group = "net.fabricmc", name = "fabric-language-kotlin", version = Constants.FABRIC_KOTLIN_VERSION)
+}
+
+fabricApi {
+    configureDataGeneration {
+        modId = Constants.MOD_ID
+        outputDirectory = file("src/generated/resources")
+    }
 }
 
 loom {
@@ -24,10 +35,31 @@ loom {
 
     @Suppress("UnstableApiUsage")
     mixin {
-        defaultRefmapName = "${Constants.MOD_ID}.refmap.json"
         useLegacyMixinAp = false
     }
+
+    runs {
+        named("client") {
+            client()
+
+            configName = "Fabric Client"
+            isIdeConfigGenerated = true
+        }
+
+        named("server") {
+            server()
+
+            configName = "Fabric Server"
+            isIdeConfigGenerated = true
+        }
+
+        named("datagen") {
+            configName = "Fabric Data"
+            isIdeConfigGenerated = true
+        }
+    }
 }
+
 
 tasks.remapJar.configure {
     archiveClassifier = "fat"

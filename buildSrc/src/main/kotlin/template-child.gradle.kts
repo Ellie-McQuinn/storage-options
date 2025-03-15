@@ -4,11 +4,7 @@ plugins {
     id("template-shared")
 }
 
-var parents = if (project.name == "neoforge" || project.name == "thread") {
-    listOf("common")
-} else {
-    listOf("common", "thread")
-}
+var parents = listOf("common")
 
 parents.forEach {
     evaluationDependsOn(":${it}")
