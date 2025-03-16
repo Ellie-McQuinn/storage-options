@@ -1,0 +1,6 @@
+{
+  "parent": "ellsso:block/barrel_top",
+  "textures": {
+    "top": "minecraft:block/barrel_top_open"
+  }
+}

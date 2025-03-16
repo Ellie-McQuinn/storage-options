@@ -1,0 +1,136 @@
+{
+  "variants": {
+    "type=single,facing=up,open=false": {
+      "model": "minecraft:block/barrel"
+    },
+    "type=single,facing=up,open=true": {
+      "model": "minecraft:block/barrel_open"
+    },
+    "type=single,facing=down,open=false": {
+      "model": "minecraft:block/barrel",
+      "x": 180
+    },
+    "type=single,facing=down,open=true": {
+      "model": "minecraft:block/barrel_open",
+      "x": 180
+    },
+    "type=single,facing=north,open=false": {
+      "model": "minecraft:block/barrel",
+      "x": 90
+    },
+    "type=single,facing=north,open=true": {
+      "model": "minecraft:block/barrel_open",
+      "x": 90
+    },
+    "type=single,facing=east,open=false": {
+      "model": "minecraft:block/barrel",
+      "x": 90,
+      "y": 90
+    },
+    "type=single,facing=east,open=true": {
+      "model": "minecraft:block/barrel_open",
+      "x": 90,
+      "y": 90
+    },
+    "type=single,facing=south,open=false": {
+      "model": "minecraft:block/barrel",
+      "x": 90,
+      "y": 180
+    },
+    "type=single,facing=south,open=true": {
+      "model": "minecraft:block/barrel_open",
+      "x": 90,
+      "y": 180
+    },
+    "type=single,facing=west,open=false": {
+      "model": "minecraft:block/barrel",
+      "x": 90,
+      "y": 270
+    },
+    "type=single,facing=west,open=true": {
+      "model": "minecraft:block/barrel_open",
+      "x": 90,
+      "y": 270
+    },
+
+    "type=top,facing=up,open=false": {
+      "model": "ellsso:block/barrel_top"
+    },
+    "type=top,facing=up,open=true": {
+      "model": "ellsso:block/barrel_top_open"
+    },
+    "type=top,facing=down,open=false": {
+      "model": "ellsso:block/barrel_top",
+      "x": 180
+    },
+    "type=top,facing=down,open=true": {
+      "model": "ellsso:block/barrel_top_open",
+      "x": 180
+    },
+    "type=top,facing=north,open=false": {
+      "model": "ellsso:block/barrel_top",
+      "x": 90
+    },
+    "type=top,facing=north,open=true": {
+      "model": "ellsso:block/barrel_top_open",
+      "x": 90
+    },
+    "type=top,facing=east,open=false": {
+      "model": "ellsso:block/barrel_top",
+      "x": 90,
+      "y": 90
+    },
+    "type=top,facing=east,open=true": {
+      "model": "ellsso:block/barrel_top_open",
+      "x": 90,
+      "y": 90
+    },
+    "type=top,facing=south,open=false": {
+      "model": "ellsso:block/barrel_top",
+      "x": 90,
+      "y": 180
+    },
+    "type=top,facing=south,open=true": {
+      "model": "ellsso:block/barrel_top_open",
+      "x": 90,
+      "y": 180
+    },
+    "type=top,facing=west,open=false": {
+      "model": "ellsso:block/barrel_top",
+      "x": 90,
+      "y": 270
+    },
+    "type=top,facing=west,open=true": {
+      "model": "ellsso:block/barrel_top_open",
+      "x": 90,
+      "y": 270
+    },
+
+    "type=bottom,facing=up": {
+      "model": "ellsso:block/barrel_bottom"
+    },
+    "type=bottom,facing=down": {
+      "model": "ellsso:block/barrel_bottom",
+      "x": 180
+    },
+    "type=bottom,facing=north": {
+      "model": "ellsso:block/barrel_bottom",
+      "x": 90
+    },
+    "type=bottom,facing=east": {
+      "model": "ellsso:block/barrel_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "type=bottom,facing=south": {
+      "model": "ellsso:block/barrel_bottom",
+      "x": 90,
+      "y": 180
+    },
+    "type=bottom,facing=west": {
+      "model": "ellsso:block/barrel_bottom",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
