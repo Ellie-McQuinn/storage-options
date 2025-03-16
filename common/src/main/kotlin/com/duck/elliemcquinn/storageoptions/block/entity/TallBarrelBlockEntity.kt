@@ -50,7 +50,6 @@ class TallBarrelBlockEntity(pos: BlockPos, state: BlockState) : RandomizableCont
             val container = (player.containerMenu as? ChestMenu ?: return false).container
             return container === this@TallBarrelBlockEntity || container is CompoundContainer && container.contains(this@TallBarrelBlockEntity)
         }
-
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
