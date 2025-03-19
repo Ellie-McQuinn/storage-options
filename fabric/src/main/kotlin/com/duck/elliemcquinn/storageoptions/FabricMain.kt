@@ -15,6 +15,7 @@ object FabricMain : ModInitializer {
         ModItems.init()
 
         ItemStorage.SIDED.registerForBlockEntity({ entity, direction ->
+            @Suppress("UNCHECKED_CAST")
             entity.getSharedItemAccess() as Storage<ItemVariant>
         }, ModBlockEntities.BARREL)
     }

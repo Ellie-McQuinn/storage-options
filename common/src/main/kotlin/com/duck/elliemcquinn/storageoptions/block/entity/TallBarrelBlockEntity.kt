@@ -141,6 +141,7 @@ class TallBarrelBlockEntity(pos: BlockPos, state: BlockState) : RandomizableCont
         return ensureDoubleCache()?.itemAccess ?: itemAccess
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setBlockState(state: BlockState) {
         val oldState = blockState
         super.setBlockState(state)
