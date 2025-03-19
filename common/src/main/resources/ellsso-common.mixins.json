@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.duck.elliemcquinn.storageoptions.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "HopperDoubleBlockSupport"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

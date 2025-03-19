@@ -10,10 +10,10 @@ import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.stats.Stats
 import net.minecraft.util.RandomSource
-import net.minecraft.world.CompoundContainer
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.MenuProvider
+import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.monster.piglin.PiglinAi
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -41,34 +41,29 @@ class TallBarrelBlock(properties: Properties) : BaseEntityBlock(properties) {
     }
 
     override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider? {
-        return getResult(level, state, pos) { top, bottom ->
-            if (bottom != null) {
-                val container = CompoundContainer(top, bottom)
-                object : MenuProvider {
-                    override fun getDisplayName(): Component {
-                        return if (top.hasCustomName()) {
-                            top.displayName
-                        } else if (bottom.hasCustomName()) {
-                            bottom.displayName
-                        } else {
-                            Component.translatable("container.ellsso.barrel")
-                        }
-                    }
+        val entity = level.getBlockEntity(pos) as? TallBarrelBlockEntity ?: return null
+        val doubleCache = entity.getDoubleCache()
 
-                    override fun createMenu(id: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
-                        return if (top.canOpen(player) && bottom.canOpen(player)) {
-                            top.unpackLootTable(player)
-                            bottom.unpackLootTable(player)
+        if (doubleCache == null) {
+            return entity
+        } else {
+            val top = doubleCache.first
+            val bottom = doubleCache.second
+            val container = doubleCache.container
 
-                            ChestMenu.sixRows(id, playerInventory, container)
-                        } else {
-                            null
-                        }
+            return SimpleMenuProvider(
+                fun (id: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
+                    return if (top.canOpen(player) && bottom.canOpen(player)) {
+                        top.unpackLootTable(player)
+                        bottom.unpackLootTable(player)
+
+                        ChestMenu.sixRows(id, playerInventory, container)
+                    } else {
+                        null
                     }
-                }
-            } else {
-                top
-            }
+                },
+                top.customName ?: bottom.customName ?: Component.translatable("container.ellsso.barrel")
+            )
         }
     }
 
@@ -164,14 +159,15 @@ class TallBarrelBlock(properties: Properties) : BaseEntityBlock(properties) {
     }
 
     override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
-        return getResult(level, state, pos) { top, bottom ->
-            return@getResult if (bottom != null) {
-                val container = CompoundContainer(top, bottom)
-                AbstractContainerMenu.getRedstoneSignalFromContainer(container)
-            } else {
-                AbstractContainerMenu.getRedstoneSignalFromContainer(top)
-            }
-        } ?: 0
+        val entity = level.getBlockEntity(pos) as? TallBarrelBlockEntity ?: return 0
+
+        val doubleCache = entity.getDoubleCache()
+
+        return if (doubleCache == null) {
+            AbstractContainerMenu.getRedstoneSignalFromContainer(entity)
+        } else {
+            AbstractContainerMenu.getRedstoneSignalFromContainer(doubleCache.container)
+        }
     }
 
     override fun rotate(state: BlockState, rotation: Rotation): BlockState {
@@ -199,27 +195,6 @@ class TallBarrelBlock(properties: Properties) : BaseEntityBlock(properties) {
                 BarrelType.TOP -> facing.opposite
                 BarrelType.BOTTOM -> facing
                 else -> null
-            }
-        }
-
-        fun <R : Any> getResult(level: Level, state: BlockState, pos: BlockPos, func: (TallBarrelBlockEntity, TallBarrelBlockEntity?) -> R): R? {
-            val entity = level.getBlockEntity(pos) as? TallBarrelBlockEntity ?: return null
-            val barrelType = state.getValue(BARREL_TYPE)
-
-            if (barrelType == BarrelType.SINGLE) {
-                return func(entity, null)
-            }
-
-            val otherEntity = level.getBlockEntity(pos.relative(getConnectedDirection(state)!!)) as? TallBarrelBlockEntity
-
-            if (otherEntity == null) {
-                return func(entity, null)
-            }
-
-            return if (barrelType == BarrelType.TOP) {
-                func(entity, otherEntity)
-            } else {
-                func(otherEntity, entity)
             }
         }
     }

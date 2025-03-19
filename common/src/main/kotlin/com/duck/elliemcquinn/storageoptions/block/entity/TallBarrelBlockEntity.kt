@@ -2,6 +2,8 @@ package com.duck.elliemcquinn.storageoptions.block.entity
 
 import com.duck.elliemcquinn.storageoptions.block.TallBarrelBlock
 import com.duck.elliemcquinn.storageoptions.block.misc.BarrelType
+import com.duck.elliemcquinn.storageoptions.block.misc.CachedDoubleBlock
+import com.duck.elliemcquinn.storageoptions.platform.CommonHelper
 import com.duck.elliemcquinn.storageoptions.registration.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -26,6 +28,8 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
 class TallBarrelBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainerBlockEntity(ModBlockEntities.BARREL, pos, state) {
+    private var doubleCache: CachedDoubleBlock? = null
+    val itemAccess: Any by lazy { CommonHelper.INSTANCE.getItemAccess(this) }
     private var items: NonNullList<ItemStack> = NonNullList.withSize<ItemStack>(27, ItemStack.EMPTY)
     private val openersCounter: ContainerOpenersCounter = object : ContainerOpenersCounter() {
         override fun onOpen(level: Level, pos: BlockPos, state: BlockState) {
@@ -99,6 +103,61 @@ class TallBarrelBlockEntity(pos: BlockPos, state: BlockState) : RandomizableCont
     fun recheckOpen() {
         if (!remove) {
             openersCounter.recheckOpeners(level!!, blockPos, blockState)
+        }
+    }
+
+    private fun ensureDoubleCache(): CachedDoubleBlock? {
+        if (doubleCache != null) {
+            return doubleCache
+        }
+
+        val barrelType = blockState.getValue(TallBarrelBlock.BARREL_TYPE)
+
+        if (barrelType != BarrelType.SINGLE) {
+            val otherEntity = level!!.getBlockEntity(blockPos.relative(TallBarrelBlock.getConnectedDirection(blockState)!!)) as? TallBarrelBlockEntity
+
+            if (otherEntity != null) {
+                val doubleCache = if (barrelType == BarrelType.TOP) {
+                    CachedDoubleBlock(this, otherEntity)
+                } else {
+                    CachedDoubleBlock(otherEntity, this)
+                }
+
+                doubleCache.first.doubleCache = doubleCache
+                doubleCache.second.doubleCache = doubleCache
+
+                return doubleCache
+            }
+        }
+
+        check(doubleCache == null) { "Double cache should be null but it isn't." }
+
+        return null
+    }
+
+    fun getDoubleCache(): CachedDoubleBlock? = ensureDoubleCache()
+
+    fun getSharedItemAccess(): Any {
+        return ensureDoubleCache()?.itemAccess ?: itemAccess
+    }
+
+    override fun setBlockState(state: BlockState) {
+        val oldState = blockState
+        super.setBlockState(state)
+
+        if ((oldState.getValue(BlockStateProperties.FACING) != state.getValue(BlockStateProperties.FACING))
+            || (oldState.getValue(TallBarrelBlock.BARREL_TYPE) != state.getValue(TallBarrelBlock.BARREL_TYPE))
+        ) {
+            level?.let {
+                CommonHelper.INSTANCE.invalidateCapabilities(it, blockPos)
+            }
+
+            if (state.getValue(TallBarrelBlock.BARREL_TYPE) == BarrelType.SINGLE) {
+                doubleCache?.let {
+                    it.first.doubleCache = null
+                    it.second.doubleCache = null
+                }
+            }
         }
     }
 

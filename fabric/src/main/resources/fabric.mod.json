@@ -23,9 +23,12 @@
   "entrypoints": {
     "main": [
       {
-        "value": "com.duck.elliemcquinn.storageoptions.fabric.Main",
+        "value": "com.duck.elliemcquinn.storageoptions.FabricMain",
         "adapter": "kotlin"
       }
     ]
-  }
+  },
+  "mixins": [
+    "ellsso-common.mixins.json"
+  ]
 }
