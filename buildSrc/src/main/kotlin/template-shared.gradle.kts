@@ -1,6 +1,8 @@
 import com.duck.elliemcquinn.template.Constants
+import com.duck.elliemcquinn.template.task.JsonProcessingReader
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import kotlin.jvm.java
 
 plugins {
     `java-library`
@@ -131,5 +133,9 @@ tasks.processResources {
     inputs.properties(replacements)
     filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/neoforge.mods.toml", "*.mixins.json", "*.mcmeta")) {
         expand(replacements)
+    }
+
+    filesMatching(listOf("*.json", "*.mcmeta")) {
+        filter(JsonProcessingReader::class.java)
     }
 }

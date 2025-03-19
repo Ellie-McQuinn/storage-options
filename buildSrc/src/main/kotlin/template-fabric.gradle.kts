@@ -1,5 +1,4 @@
 import com.duck.elliemcquinn.template.Constants
-import com.duck.elliemcquinn.template.task.ProcessJsonTask
 
 plugins {
     id("template-child")
@@ -60,22 +59,6 @@ loom {
     }
 }
 
-
-tasks.remapJar.configure {
-    archiveClassifier = "fat"
-}
-
 tasks.processResources {
     exclude("META-INF/accesstransformer.cfg")
-}
-
-tasks.register("processJson", ProcessJsonTask::class) {
-    group = "multiloader"
-    dependsOn(tasks.remapJar)
-    input.set(tasks.remapJar.get().outputs.files.singleFile)
-    archiveClassifier = ""
-}
-
-tasks.build {
-    dependsOn("processJson")
 }

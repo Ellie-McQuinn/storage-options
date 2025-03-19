@@ -1,6 +1,5 @@
 import com.duck.elliemcquinn.template.toTitleCase
 import com.duck.elliemcquinn.template.Constants
-import com.duck.elliemcquinn.template.task.ProcessJsonTask
 
 plugins {
     id("template-child")
@@ -52,21 +51,6 @@ sourceSets.main {
     resources.srcDirs("src/generated/resources")
 }
 
-tasks.jar {
-    archiveClassifier = "fat"
-}
-
 tasks.processResources {
     exclude("*.accesswidener")
-}
-
-tasks.register("processJson", ProcessJsonTask::class) {
-    group = "multiloader"
-    dependsOn(tasks.jar)
-    input.set(tasks.jar.get().outputs.files.singleFile)
-    archiveClassifier = ""
-}
-
-tasks.build {
-    dependsOn("processJson")
 }
