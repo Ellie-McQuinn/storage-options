@@ -12,6 +12,12 @@ object ModItems {
         BlockItem(ModBlocks.BARREL, Item.Properties())
     )
 
+    val CLASSIC_CHEST: BlockItem = Registry.register(
+        BuiltInRegistries.ITEM,
+        "ellsso:classic_chest",
+        BlockItem(ModBlocks.CLASSIC_CHEST, Item.Properties())
+    )
+
     fun init() {
         // NO-OP for now
     }

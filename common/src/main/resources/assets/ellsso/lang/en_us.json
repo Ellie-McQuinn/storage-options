@@ -1,4 +1,6 @@
 {
   "block.ellsso.barrel": "Suspicious Barrel",
-  "container.ellsso.barrel": "Tall Barrel"
+  "container.ellsso.barrel": "Tall Barrel",
+
+  "block.ellsso.classic_chest": "Classic Chest"
 }

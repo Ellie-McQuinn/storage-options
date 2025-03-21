@@ -6,7 +6,7 @@ object Constants {
     const val GROUP = "com.duck.elliemcquinn.storageoptions"
     const val MOD_ID = "ellsso"
     const val MOD_NAME = "Ellie's Storage Options"
-    const val MOD_VERSION = "2101.0.1.1"
+    const val MOD_VERSION = "2101.0.2.0-beta.1"
 
     val CONTRIBUTORS = linkedMapOf(
         "Ellie McQuinn" to "Project Owner"
