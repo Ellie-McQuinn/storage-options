@@ -36,3 +36,7 @@ dependencies {
         exclude(group = "net.fabricmc", module = "fabric-loader")
     }
 }
+
+sourceSets.main {
+    resources.srcDirs("src/generated/resources")
+}

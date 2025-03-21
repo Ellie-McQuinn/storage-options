@@ -1,4 +1,3 @@
-import com.duck.elliemcquinn.template.toTitleCase
 import com.duck.elliemcquinn.template.Constants
 
 plugins {
@@ -19,12 +18,32 @@ neoForge {
     runs {
         configureEach {
             systemProperty("neoforge.enabledGameTestNamespaces", Constants.MOD_ID)
-            ideName = "NeoForge ${name.toTitleCase()} (${project.path})"
         }
 
-        create("client") { client() }
+        create("client") {
+            client()
+            ideName = "NeoForge Client (:neoforge)"
+        }
+
+        create("commonData") {
+            data()
+            ideName = "Common Data (:neoforge)"
+
+            val common = findProject(":common")!!
+
+            programArguments.addAll(
+                "--mod", Constants.MOD_ID,
+                "--output", common.file("src/generated/resources").absolutePath,
+                "--existing", common.file("src/main/resources").absolutePath,
+                "--all"
+            )
+
+            systemProperty("ellsso.datagen.common", "true")
+        }
+
         create("data") {
             data()
+            ideName = "NeoForge Data (:neoforge)"
 
             programArguments.addAll(
                 "--mod", Constants.MOD_ID,
@@ -33,7 +52,11 @@ neoForge {
                 "--all"
             )
         }
-        create("server") { server() }
+
+        create("server") {
+            server()
+            ideName = "NeoForge Server (:neoforge)"
+        }
     }
 
     mods {

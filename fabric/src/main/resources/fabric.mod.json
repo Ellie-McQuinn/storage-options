@@ -26,6 +26,12 @@
         "value": "com.duck.elliemcquinn.storageoptions.FabricMain",
         "adapter": "kotlin"
       }
+    ],
+    "fabric-datagen": [
+      {
+        "value": "com.duck.elliemcquinn.storageoptions.datagen.DataMain",
+        "adapter": "kotlin"
+      }
     ]
   },
   "mixins": [
